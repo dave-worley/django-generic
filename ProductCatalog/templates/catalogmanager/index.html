@@ -3,12 +3,29 @@
   <div class="row" id="catalog-items">
     {% for product in products %}
       <div class="col-md-4">
-        <p>{{ product.name }}</p>
+        <div class="product">
+          <p>{{ product.name }}</p>
 
-        <p>{{ product.description }}</p>
+          <p>{{ product.description }}</p>
 
-        <p>{{ product.value }}</p>
+          <p>{{ product.value }}</p>
+        </div>
       </div>
     {% endfor %}
   </div>
+  <div class="pagination">
+    <span class="step-links">
+        {% if products.has_previous %}
+            <a href="?page={{ products.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ products.number }} of {{ products.paginator.num_pages }}.
+        </span>
+
+        {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}

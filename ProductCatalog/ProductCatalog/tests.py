@@ -24,6 +24,9 @@ class CatalogUserTestCase(LiveServerTestCase):
         item_list = self.browser.find_element_by_id('catalog-items')
         self.assertIsNotNone(item_list)
 
+        add_product_button = self.browser.find_element_by_id('add-product')
+        self.assertEqual('Add Product', add_product_button.text)
+
         self.fail('Incomplete test.')
 
     def tearDown(self):

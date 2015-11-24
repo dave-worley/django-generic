@@ -1,9 +1,19 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Product
 
 # Create your views here.
 def index(request):
+    product_list = Product.objects.all()
+    paginator = Paginator(product_list, 9)
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
     context = {
-        'products': Product.objects.all()[:10]
+        'products': products
     }
-    return render_to_response('catalogmanager/index.html', context)
+    return render(request, 'catalogmanager/index.html', context)
