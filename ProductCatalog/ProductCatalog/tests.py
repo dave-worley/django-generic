@@ -13,7 +13,7 @@ class CatalogUserTestCase(LiveServerTestCase):
         """
 
         # user may or may not be registered
-        # the basic reader should be visible
+        # a list of catalog items should be visible
 
         home_page = self.browser.get(self.live_server_url + '/')
 
@@ -21,6 +21,8 @@ class CatalogUserTestCase(LiveServerTestCase):
         logo = self.browser.find_element_by_id('logo')
         self.assertEqual('Product Catalog', logo.text)
 
+        item_list = self.browser.find_element_by_id('catalog-items')
+        self.assertIsNotNone(item_list)
 
         self.fail('Incomplete test.')
 

@@ -22,9 +22,11 @@
   {% block head %}{% endblock %}
 </head>
 <body {{ body_attr|safe }}>
-<nav>
-  <h1 id="logo">Product Catalog</h1>
-</nav>
-{% block content %}<p>Hello world! This is HTML5 Boilerplate.</p>{% endblock %}
+<div class="container">
+  <nav>
+    <h1 id="logo"><a href="/">Product Catalog</a></h1>
+  </nav>
+  {% block content %}<p>Hello world! This is HTML5 Boilerplate.</p>{% endblock %}
+</div>
 </body>
 </html>

@@ -1,4 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-  hi!
+  <div class="row" id="catalog-items">
+    {% for product in products %}
+      <div class="col-md-4">
+        <p>{{ product.name }}</p>
+
+        <p>{{ product.description }}</p>
+
+        <p>{{ product.value }}</p>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
