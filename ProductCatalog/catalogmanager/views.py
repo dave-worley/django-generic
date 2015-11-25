@@ -17,8 +17,10 @@ def index(request):
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
     context = {
-        'products': products
+        'products': products,
+        'message': request.session.get('message')
     }
+    request.session['message'] = None
     return render(request, 'catalogmanager/index.html', context)
 
 
@@ -56,3 +58,10 @@ def addProduct(request, product_id=None):
         'form': form,
         'is_editing': True if product else False
     })
+
+def removeProduct(request, product_id):
+    product = Product.objects.get(pk = product_id)
+    name = product.name
+    product.delete()
+    request.session['message'] = 'Product {} was successfully deleted.'.format(name)
+    return HttpResponseRedirect(reverse('home'))
