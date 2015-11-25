@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ product.name }}</h2>
+  <p>${{ product.value }}</p>
+  <p>{{ product.description }}</p>
+  <p>Dimensions &amp; Weight:</p>
+  <ul>
+    <li>width: {{ product.width }}</li>
+    <li>length: {{ product.length}}</li>
+    <li>height: {{ product.height }}</li>
+    <li>weight: {{ product.weight }}</li>
+  </ul>
+{% endblock %}

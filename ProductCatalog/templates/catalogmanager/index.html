@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-  <div class="row" id="catalog-items">
-    {% for product in products %}
-      <div class="col-md-4">
-        <div class="product">
-          <p>{{ product.name }}</p>
+  <div id="catalog-items">
+  {% for product in products %}
+    {% if forloop.first %}<div class="row">{% endif %}
+      <div class="col-lg-4">
+        <p><a href="{% url 'product' product.id %}">{{ product.name }}</a></p>
 
-          <p>{{ product.description }}</p>
+        <p>{{ product.description }}</p>
 
-          <p>{{ product.value }}</p>
-        </div>
+        <p>{{ product.value }}</p>
       </div>
-    {% endfor %}
+    {% if forloop.counter|divisibleby:3 %}</div>
+      <hr/>
+    <div class="row">{% endif %}
+    {% if forloop.last %}</div>{% endif %}
+  {% endfor %}
   </div>
   <div class="pagination">
     <span class="step-links">
@@ -31,7 +34,7 @@
   <hr/>
   <div class="row">
     <div class="col-md-4 offset-8">
-      <button id="add-product">Add Product</button>
+      <a href="{% url 'addproduct' %}" class="btn btn-primary" id="add-product">Add Product</a>
     </div>
   </div>
 {% endblock %}
