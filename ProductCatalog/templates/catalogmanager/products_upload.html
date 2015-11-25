@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Upload Products</h2>
+  <p>Choose a CSV file to upload.</p>
+  <form action="." method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit"/>
+  </form>
+  {% if products %}
+    <hr/>
+  <p>Products have been uploaded.</p>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Width</th>
+      <th>Height</th>
+      <th>Length</th>
+      <th>Weight</th>
+      <th>Value</th>
+    </tr>
+    {% for product in products %}
+      <tr>
+        <td><a href="{% url 'product' product.id %}">{{ product.name }}</a></td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.width }}</td>
+        <td>{{ product.length }}</td>
+        <td>{{ product.height }}</td>
+        <td>{{ product.weight }}</td>
+        <td>${{ product.value }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+{% endblock %}

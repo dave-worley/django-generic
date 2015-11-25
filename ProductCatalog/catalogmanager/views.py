@@ -1,9 +1,12 @@
+import csv
+from io import TextIOWrapper
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Product
 from .forms import ProductForm
+from .forms import ProductsUploadForm
 
 # Create your views here.
 def index(request):
@@ -59,9 +62,42 @@ def addProduct(request, product_id=None):
         'is_editing': True if product else False
     })
 
+
 def removeProduct(request, product_id):
-    product = Product.objects.get(pk = product_id)
+    product = Product.objects.get(pk=product_id)
     name = product.name
     product.delete()
     request.session['message'] = 'Product {} was successfully deleted.'.format(name)
     return HttpResponseRedirect(reverse('home'))
+
+
+def handle_products_csv(csv_file):
+    f = TextIOWrapper(csv_file.file, encoding='ascii')
+    reader = csv.reader(f)
+    products = []
+    for row in reader:
+        product = Product.objects.create(
+            name=row[0],
+            description=row[1],
+            width=row[2],
+            length=row[3],
+            height=row[4],
+            weight=row[5],
+            value=row[6]
+        )
+        products.append(product)
+    return products
+
+
+def uploadProducts(request):
+    products = None
+    if request.method == 'GET':
+        form = ProductsUploadForm()
+    else:
+        form = ProductsUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            products = handle_products_csv(request.FILES['file'])
+    return render(request, 'catalogmanager/products_upload.html', {
+        'form': form,
+        'products': products
+    })
