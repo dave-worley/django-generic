@@ -27,7 +27,5 @@ class CatalogUserTestCase(LiveServerTestCase):
         add_product_button = self.browser.find_element_by_id('add-product')
         self.assertEqual('Add Product', add_product_button.text)
 
-        self.fail('Incomplete test.')
-
     def tearDown(self):
         self.browser.quit()

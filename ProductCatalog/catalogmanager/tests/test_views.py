@@ -1,9 +1,11 @@
-from django.test import TestCase
+from django.contrib.staticfiles.testing import LiveServerTestCase
 from django.test import RequestFactory
 from django.db.models.query import QuerySet
+from django.core.paginator import Page
 from catalogmanager.views import index
+from catalogmanager.views import productDetail
 
-class IndexViewTestCase(TestCase):
+class IndexViewTestCase(LiveServerTestCase):
 
     def setUp(self):
         self.factory = RequestFactory()
@@ -19,7 +21,19 @@ class IndexViewTestCase(TestCase):
 
     def test_index_view_returns_products(self):
         """
-        Make sure we have some Products in the response.
+        Make sure we have some paginated Products in the response.
         """
         response = self.client.get('/')
-        self.assertIs(type(response.context['products']), QuerySet)
+        self.assertIs(type(response.context['products']), Page)
+
+class ProductViewTestCase(LiveServerTestCase):
+
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_product_view_basic(self):
+        """
+        Makes sure the product detail view exists and uses the correct template.
+        """
+        request = self.factory.get('/product/1/')
+        self.assertTemplateUsed('catalogmanager/product.html')
