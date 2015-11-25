@@ -4,6 +4,10 @@
   {% csrf_token %}
     {{ form.as_p }}
     <hr/>
-    <input type="submit" class="btn btn-primary" value="Add Product" />
+    {% if is_editing %}
+      <input type="submit" class="btn btn-primary" value="Edit Product" />
+    {% else %}
+      <input type="submit" class="btn btn-primary" value="Add Product" />
+    {% endif %}
   </form>
 {% endblock %}

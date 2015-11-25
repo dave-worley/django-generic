@@ -10,4 +10,6 @@
     <li>height: {{ product.height }}</li>
     <li>weight: {{ product.weight }}</li>
   </ul>
+  <hr/>
+  <a class="btn btn-primary" href="{% url 'editproduct' product.id %}">Edit Product</a>
 {% endblock %}

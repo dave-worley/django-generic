@@ -21,32 +21,38 @@ def index(request):
     }
     return render(request, 'catalogmanager/index.html', context)
 
+
 def productDetail(request, product_id):
-    product = Product.objects.get(pk = product_id)
+    product = Product.objects.get(pk=product_id)
     context = {
         'product': product
     }
     return render(request, 'catalogmanager/product.html', context)
 
-def addProduct(request):
+
+def addProduct(request, product_id=None):
+    product = None
+    if product_id is not None:
+        product = Product.objects.get(pk=product_id)
     if request.method == 'GET':
-        form = ProductForm()
+        form = ProductForm(instance=product)
     else:
 
         form = ProductForm(request.POST)
         # If data is valid, proceeds to create a new post and redirect the user
         if form.is_valid():
             product = Product.objects.create(
-                name = form.cleaned_data['name'],
-                description = form.cleaned_data['description'],
-                width = form.cleaned_data['width'],
-                length = form.cleaned_data['length'],
-                height = form.cleaned_data['height'],
-                weight = form.cleaned_data['weight'],
-                value = form.cleaned_data['value']
+                name=form.cleaned_data['name'],
+                description=form.cleaned_data['description'],
+                width=form.cleaned_data['width'],
+                length=form.cleaned_data['length'],
+                height=form.cleaned_data['height'],
+                weight=form.cleaned_data['weight'],
+                value=form.cleaned_data['value']
             )
             return HttpResponseRedirect(reverse('product', kwargs={'product_id': product.id}))
 
     return render(request, 'catalogmanager/product_form.html', {
         'form': form,
+        'is_editing': True if product else False
     })
