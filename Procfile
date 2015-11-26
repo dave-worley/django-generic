@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath ProductCatalog ProductCatalog.wsgi
+web: gunicorn ProductCatalog.wsgi --pythonpath ProductCatalog/ProductCatalog
