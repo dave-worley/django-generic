@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['PRODUCTCATALOGKEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+IS_REMOTE = True if os.environ['IS_REMOTE'] == 'True' else False
+DEBUG = not IS_REMOTE
 
 ALLOWED_HOSTS = []
 
