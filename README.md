@@ -48,3 +48,5 @@ _Disclaimer: This process will not work on Windows. You are not using Windows I 
 
 7. You're all set. Run the Django development server.
    > python manage.py runserver
+
+I've included a test.csv file in the project root directory that can be used to populate the database. Load it a couple times to see the simple pagination.
