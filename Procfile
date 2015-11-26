@@ -1,1 +1,1 @@
-web: gunicorn ProductCatalogweb: gunicorn ProductCatalog.wsgi --log-file -
+web: gunicorn ProductCatalog.wsgi --log-file -
