@@ -1,1 +1,1 @@
-web: gunicorn ProductCatalog.wsgi --pythonpath ProductCatalog/ProductCatalog
+web: sh -c 'cd ProductCatalog/ProductCatalog && gunicorn ProductCatalog.wsgi:application'
