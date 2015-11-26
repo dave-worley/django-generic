@@ -1,1 +1,1 @@
-web: gunicorn ProductCatalog.wsgi --log-file -
+web: waitress-serve --port=$PORT ProductCatalog.wsgi:application
