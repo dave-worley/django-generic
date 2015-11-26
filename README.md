@@ -2,6 +2,12 @@
 
 I elected to work on the Product Catalog utility project. The project was created using Python 3.4 and Django 1.8. Installation instructions follow the project features.
 
+The project can be viewed online at:
+
+    > https://shrouded-temple-9096.herokuapp.com/
+
+Note that since this is the free Heroku plan it may take a few seconds to start the first time.
+
 My Product Catalog has the following features:
 
    - Displays a formatted list of products.
