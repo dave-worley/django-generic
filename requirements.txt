@@ -1,6 +1,7 @@
 click==6.0
 decorator==4.0.4
 Django==1.8.7
+django-localflavor==1.1
 geocoder==1.6.4
 python-dateutil==2.4.2
 python-mimeparse==0.1.4
