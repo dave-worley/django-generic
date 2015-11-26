@@ -4,7 +4,7 @@ I elected to work on the Product Catalog utility project. The project was create
 
 The project can be viewed online at:
 
-    > [https://shrouded-temple-9096.herokuapp.com/](https://shrouded-temple-9096.herokuapp.com/)
+[https://shrouded-temple-9096.herokuapp.com/](https://shrouded-temple-9096.herokuapp.com/)
 
 Note that since this is the free Heroku plan it may take a few seconds to start the first time.
 
