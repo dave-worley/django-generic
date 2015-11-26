@@ -1,1 +1,1 @@
-web: sh -c 'cd ProductCatalog/ProductCatalog && gunicorn ProductCatalog.wsgi:application'
+web: gunicorn ProductCatalog.wsgi:application
