@@ -42,8 +42,7 @@ _Disclaimer: This process will not work on Windows. You are not using Windows I 
 5. Change to the ProductCatalog directory.
    > cd ProductCatalog
 
-6. Run the Django migration commands to create the sqlite database.
-   > python manage.py makemigrations
+6. Run the Django migration command to create the sqlite database.
    > python manage.py migrate
 
 7. You're all set. Run the Django development server.
