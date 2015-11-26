@@ -1,1 +1,1 @@
-web: gunicorn ProductCatalog:app --log-file=-
+web: gunicorn ProductCatalogweb: gunicorn ProductCatalog.wsgi --log-file -
