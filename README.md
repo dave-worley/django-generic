@@ -39,13 +39,10 @@ _Disclaimer: This process will not work on Windows. You are not using Windows I 
 4. Install the dependencies with pip. This will install Django in the virtualenv.
    > pip install -r requirements.txt
 
-5. Change to the ProductCatalog directory.
-   > cd ProductCatalog
-
-6. Run the Django migration command to create the sqlite database.
+5. Run the Django migration command to create the sqlite database.
    > python manage.py migrate
 
-7. You're all set. Run the Django development server.
+6. You're all set. Run the Django development server.
    > python manage.py runserver
 
 I've included a test.csv file in the project root directory that can be used to populate the database. Load it a couple times to see the simple pagination.
