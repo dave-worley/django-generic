@@ -27,8 +27,10 @@ I've tried for a fairly production ready system. Some caveats:
 
 _Disclaimer: This process will not work on Windows. You are not using Windows I bet._
 
-1. Download the repo.
+1. Download the repo and navigate to the directory.
    > git clone https://github.com/dave-worley/shipwire-project.git
+
+   > cd shipwire-project
 
 2. Use Python 3.4. Install a virtualenv.
    > virtualenv venv
