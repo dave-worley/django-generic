@@ -1,4 +1,5 @@
 from django.db import models
+from localflavor.us.models import USStateField, USZipCodeField, PhoneNumberField
 
 class Product(models.Model):
 
@@ -12,3 +13,17 @@ class Product(models.Model):
 
     def __unicode__(self):
         return self.name
+
+class Order(models.Model):
+    recipient_name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    state = USStateField()
+    zip = USZipCodeField()
+    phone = PhoneNumberField()
+
+    product = models.ForeignKey(Product)
+    quantity = models.IntegerField()
+
+    def __unicode__(self):
+        return "{} ordered by {}".format(self.product.name, self.recipient_name)

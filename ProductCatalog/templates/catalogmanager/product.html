@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
   <h2>{{ product.name }}</h2>
+  <a id="order-btn" class="btn btn-success" href="{% url 'orderproduct' product.id %}">Order This Product!</a>
   <p>${{ product.value }}</p>
   <p>{{ product.description }}</p>
   <p>Dimensions &amp; Weight:</p>

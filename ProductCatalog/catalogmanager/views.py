@@ -5,7 +5,9 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Product
+from .models import Order
 from .forms import ProductForm
+from .forms import OrderForm
 from .forms import ProductsUploadForm
 
 # Create your views here.
@@ -101,3 +103,36 @@ def uploadProducts(request):
         'form': form,
         'products': products
     })
+
+
+def orderProduct(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    if request.method == 'GET':
+        form = OrderForm()
+    else:
+        form = OrderForm(request.POST)
+        # If data is valid, proceeds to create a new post and redirect the user
+        if form.is_valid():
+            order = Order.objects.create(
+                recipient_name=form.cleaned_data['recipient_name'],
+                address=form.cleaned_data['address'],
+                city=form.cleaned_data['city'],
+                state=form.cleaned_data['state'],
+                zip=form.cleaned_data['zip'],
+                phone=form.cleaned_data['phone'],
+                product=product,
+                quantity=form.cleaned_data['quantity']
+            )
+            return HttpResponseRedirect(reverse('order', kwargs={'order_id': order.id}))
+
+    return render(request, 'catalogmanager/order_form.html', {
+        'form': form
+    })
+
+
+def orderDetail(request, order_id):
+    order = Order.objects.get(pk=order_id)
+    context = {
+        'order': order
+    }
+    return render(request, 'catalogmanager/order.html', context)

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ order.product.name }}</h2>
+  <p>Quantity: {{ order.quantity }}</p>
+  <p>Recipient: {{ order.recipient_name }}</p>
+  <p>Recipient Phone: {{ order.phone }}</p>
+  <p>Recipient Address: <br/>
+    {{ order.address }}<br/>
+    {{ order.city }}, {{ order.state }} {{ order.zip }}
+  </p>
+{% endblock %}
