@@ -39,13 +39,16 @@ class OrderForm(ModelForm):
     def clean(self):
         super().clean()
         # check the address
-        g = geocoder.google('{} {}, {} {}'.format(
-            self.cleaned_data['address'],
-            self.cleaned_data['city'],
-            self.cleaned_data['state'],
-            self.cleaned_data['zip']
-        ))
-        if g.housenumber and g.postal == self.cleaned_data['zip']:
-            return self.cleaned_data
-        else:
-            raise ValidationError('Please use a valid US address.')
+
+        if all(field in self.cleaned_data for field in ('address', 'city', 'state', 'zip')):
+
+            g = geocoder.google('{} {}, {} {}'.format(
+                self.cleaned_data['address'],
+                self.cleaned_data['city'],
+                self.cleaned_data['state'],
+                self.cleaned_data['zip']
+            ))
+            if g.housenumber and g.postal == self.cleaned_data['zip']:
+                return self.cleaned_data
+
+        raise ValidationError('Please use a valid US address.')
