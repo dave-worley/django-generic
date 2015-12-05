@@ -25,5 +25,9 @@ class Order(models.Model):
     product = models.ForeignKey(Product)
     quantity = models.IntegerField()
 
+    @property
+    def total(self):
+        return self.quantity * self.product.value
+
     def __unicode__(self):
         return "{} ordered by {}".format(self.product.name, self.recipient_name)

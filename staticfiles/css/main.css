@@ -30,3 +30,7 @@ ul.errorlist {
 #order-btn {
   float: right;
 }
+.rightnav {
+  padding-top: 3em;
+  text-align: right;
+}

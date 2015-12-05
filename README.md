@@ -26,7 +26,6 @@ According to the Extra Credit I've added the following additional features:
 I've tried for a fairly production ready system. Some caveats:
 
    - There is no user authentication. Any user is a superuser. This was a design choice based on time constraints. Implementing Django's authentication is trivial but involves a lot of boilerplate that I felt would distract from the core application features.
-   - There is no way to view a list of existing orders. There is no way to navigate to an existing order in the UI. Orders are stored in the database. This was also a choice based on time.
    - The UI is primitive and based on simple Bootstrap defaults. As far as programmer designed UI goes it's not half bad.
 
 ## Installation

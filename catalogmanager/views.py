@@ -136,3 +136,18 @@ def orderDetail(request, order_id):
         'order': order
     }
     return render(request, 'catalogmanager/order.html', context)
+
+def orderList(request):
+    order_list = Order.objects.all()
+    paginator = Paginator(order_list, 9)
+    page = request.GET.get('page')
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+    context = {
+        'orders': orders
+    }
+    return render(request, 'catalogmanager/orders.html', context)

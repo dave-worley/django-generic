@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div id="order-items">
+    {% for order in orders %}
+      {% if forloop.first %}
+        <div class="row">{% endif %}
+      <div class="col-lg-4">
+        <h4><a href="{% url 'order' order.id %}">{{ order.quantity }} {{ order.product.name }} ordered by {{ order.recipient_name }}</a></h4>
+        <hr/>
+        <h5>Shipping Information:</h5>
+        <p>
+          {{ order.address }}<br/>
+          {{ order.city }}, {{ order.state }} {{ order.zip }}
+        </p>
+        <hr/>
+        <h5>Order Total:</h5>
+        <p>{{ order.total }}</p>
+      </div>
+      {% if forloop.counter|divisibleby:3 %}</div>
+        <hr/>
+        <div class="row">{% endif %}
+      {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+  </div>
+  <div class="pagination">
+    <span class="step-links">
+        {% if orders.has_previous %}
+          <a href="?page={{ orders.previous_page_number }}">previous</a>
+        {% endif %}
+
+      <span class="current">
+            Page {{ orders.number }} of {{ orders.paginator.num_pages }}.
+      </span>
+
+      {% if orders.has_next %}
+        <a href="?page={{ orders.next_page_number }}">next</a>
+      {% endif %}
+    </span>
+  </div>
+  <hr/>
+{% endblock %}

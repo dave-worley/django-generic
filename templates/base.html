@@ -15,10 +15,16 @@
 </head>
 <body {{ body_attr|safe }}>
 <div class="container">
-  <nav>
-    <h1 id="logo"><a href="/">Product Catalog</a></h1>
-  </nav>
-  {% block content %}<p>Hello world! This is HTML5 Boilerplate.</p>{% endblock %}
+  <div class="row">
+    <div class="col-md-6">
+      <h1 id="logo"><a href="/">Product Catalog</a></h1>
+    </div>
+    <div class="col-md-2 col-md-offset-4 rightnav">
+      <a href="{% url 'orders' %}">View Orders</a>
+    </div>
+  </div>
+  <hr/>
+  {% block content %}{% endblock %}
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>

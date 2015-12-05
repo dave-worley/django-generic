@@ -7,5 +7,6 @@ urlpatterns = [
     url(r'^remove/(?P<product_id>\d+)/', views.removeProduct, name='removeproduct'),
     url(r'^upload/', views.uploadProducts, name='uploadproducts'),
     url(r'^order/(?P<product_id>\d+)/', views.orderProduct, name='orderproduct'),
+    url(r'^orders/', views.orderList, name='orders'),
     url(r'^(?P<product_id>\d+)/', views.productDetail, name='product'),
 ]
