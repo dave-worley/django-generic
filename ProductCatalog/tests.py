@@ -28,7 +28,6 @@ class CatalogUserTestCase(LiveServerTestCase):
         """
 
         # a list of catalog items should be visible
-
         home_page = self.browser.get(self.live_server_url + '/')
 
         # user should see some basic markup
@@ -67,6 +66,36 @@ class CatalogUserTestCase(LiveServerTestCase):
 
         product_title = self.browser.find_element_by_css_selector('h2')
         self.assertEqual(product_title_text, product_title.text)
+
+    def test_user_can_order_product(self):
+        """
+        Test that a user can:
+            - navigate to a product page
+            - click the order product button
+            - place an order for a product
+            - view the resulting order detail page
+        """
+
+        product = Product.objects.get(name='Test Product')
+        product_url = reverse('product', kwargs={'product_id': product.id})
+        self.browser.get('%s%s' % (self.live_server_url, product_url))
+        self.assertIn('/product/%d/' % (product.id,), self.browser.current_url)
+
+        self.find_id('order-btn').click()
+        self.assertIn('/product/order/%d/' % (product.id,), self.browser.current_url)
+
+        self.find_id('id_recipient_name').send_keys('Test User')
+        self.find_id('id_address').send_keys('1600 Pennsylvania Ave NW')
+        self.find_id('id_city').send_keys('Washington')
+        self.browser.find_element_by_xpath("//select[@id='id_state']/option[text()='District of Columbia']").click()
+        self.find_id('id_zip').send_keys('20500')
+        self.find_id('id_phone').send_keys('123-456-7890')
+        self.find_id('id_quantity').send_keys('5')
+
+        self.browser.find_element_by_xpath('//input[@value="Place Order"]').click()
+
+        order_title = self.browser.find_element_by_css_selector('h2').text
+        self.assertEqual(product.name, order_title)
 
     def tearDown(self):
         self.browser.quit()
